@@ -1,10 +1,14 @@
-import React from "react";
+import {
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+} from '../actions/actionTypes';
 
 const initialAuthState = {
   user: {},
   error: null,
-  isloggedin: false,
-  isProgress: false,
+  isLoggedin: false,
+  inProgress: false,
 };
 
 export default function auth(state = initialAuthState, action) {
@@ -12,24 +16,22 @@ export default function auth(state = initialAuthState, action) {
     case LOGIN_START:
       return {
         ...state,
-        isProgress: true,
+        inProgress: true,
       };
-
     case LOGIN_SUCCESS:
       return {
         ...state,
         user: action.user,
-        isloggedin: true,
-        isProgress: false,
+        isLoggedin: true,
+        inProgress: false,
         error: null,
       };
     case LOGIN_FAILED:
       return {
         ...state,
-        isProgress: true,
+        inProgress: false,
         error: action.error,
       };
-
     default:
       return state;
   }
